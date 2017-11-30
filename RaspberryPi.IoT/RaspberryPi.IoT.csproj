@@ -1,0 +1,29 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <RuntimeIdentifiers>win8-arm;ubuntu.14.04-arm;ubuntu.16.04-arm</RuntimeIdentifiers>
+    <AssemblyName>RaspberryPi.IoT</AssemblyName>
+    <RootNamespace>RaspberryPi.IoT</RootNamespace>
+    <PackageId>RaspberryPi.IoT</PackageId>
+    <Authors>RaspberryPi.IoT</Authors>
+    <Company>RaspberryPi.IoT</Company>
+    <Product>RaspberryPi.IoT</Product>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="2.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="2.0.0" />
+    <PackageReference Include="NLog.Extensions.Logging" Version="1.0.0-rtm-rc2" />
+    <PackageReference Include="NLog" Version="4.5.0-rc01" />
+    <PackageReference Include="Woopsa" Version="1.2.3-dev00001" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="nlog.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>
