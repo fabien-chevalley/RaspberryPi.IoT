@@ -2,8 +2,6 @@
 using Microsoft.Extensions.Logging;
 using NLog.Extensions.Logging;
 using System;
-using System.Threading;
-using Woopsa;
 
 namespace RaspberryPi.IoT
 {
@@ -16,30 +14,8 @@ namespace RaspberryPi.IoT
             var servicesProvider = RegisterServices();
             _raspberryPi = servicesProvider.GetRequiredService<IRaspberryPi>();
 
-            //var pin = raspberry.OpenPin(18);
-            //pin.SetDriveMode(GpioPinModes.Output);
-            //pin.Write(GpioPinValues.High);
-            //Thread.Sleep(1000);
-            //pin.Write(GpioPinValues.Low);
-            //Thread.Sleep(1000);
-            //pin.Write(GpioPinValues.High);
-            //Thread.Sleep(1000);
-            //pin.Write(GpioPinValues.Low);
-            //Thread.Sleep(1000);
-            //pin.Write(GpioPinValues.High);
-            //Thread.Sleep(1000);
-            //pin.Write(GpioPinValues.Low);
-            //Thread.Sleep(1000);
-
             Console.WriteLine("Press ANY key to exit");
             Console.ReadLine();
-            _raspberryPi.Dispose();
-
-            //AppDomain.CurrentDomain.ProcessExit += CurrentDomain_ProcessExit;
-        }
-
-        private static void CurrentDomain_ProcessExit(object sender, EventArgs e)
-        {
             _raspberryPi.Dispose();
         }
 
@@ -49,7 +25,6 @@ namespace RaspberryPi.IoT
             services.AddSingleton<ILoggerFactory, LoggerFactory>();
             services.AddSingleton(typeof(ILogger<>), typeof(Logger<>));
             services.AddLogging((builder) => builder.SetMinimumLevel(LogLevel.Trace));
-            
             services.AddSingleton<IRaspberryPi, RaspberryPi>();
 
             var serviceProvider = services.BuildServiceProvider();

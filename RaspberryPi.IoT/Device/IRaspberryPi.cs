@@ -6,8 +6,6 @@ namespace RaspberryPi.IoT
 {
     public interface IRaspberryPi : IDisposable
     {
-        GpioPin OpenPin(int pinNumber);
-        void ClosePin(int pinNumber);
-        IDictionary<string, string> Pins { get; }
+        IGpio Gpio { get; }
     }
 }

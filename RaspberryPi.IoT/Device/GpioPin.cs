@@ -5,79 +5,64 @@ using System.Text;
 
 namespace RaspberryPi.IoT
 {
-    public enum GpioPinModes
+    public enum GpioModes
     {
         Input,
         Output
     }
 
-    public enum GpioPinValues
+    public enum GpioValues
     {
         Low = 0,
         High = 1
     }
 
-    public class GpioPin : IDisposable
+    public class GpioPin
     {
-        #region Fields
-
-        private IRaspberryPi _owner;
-
-        #endregion
-
-        public GpioPin(IRaspberryPi owner, int pinNumber, string gpioPath)
+        public GpioPin(int pinNumber, string gpioPath)
         {
-            _owner = owner;
             PinNumber = pinNumber;
             GpioPath = gpioPath;
         }
 
-        #region Public Members
+        #region Public members
 
         public int PinNumber { get; private set; }
 
         public string GpioPath { get; private set; }
 
-        public void SetDriveMode(GpioPinModes driveMode)
+        public void SetMode(GpioModes mode)
         {
-            if (driveMode == GpioPinModes.Output)
+            switch (mode)
             {
-                File.WriteAllText(Path.Combine(GpioPath, "direction"), "out");
-                Directory.SetLastWriteTime(Path.Combine(GpioPath), DateTime.UtcNow);
-            }
-            else
-            {
-                File.WriteAllText(Path.Combine(GpioPath, "direction"), "in");
-                Directory.SetLastWriteTime(Path.Combine(GpioPath), DateTime.UtcNow);
+                case GpioModes.Input:
+                    File.WriteAllText(Path.Combine(GpioPath, "direction"), "in");
+                    Directory.SetLastWriteTime(Path.Combine(GpioPath), DateTime.UtcNow);
+                break;
+                case GpioModes.Output:
+                    File.WriteAllText(Path.Combine(GpioPath, "direction"), "out");
+                    Directory.SetLastWriteTime(Path.Combine(GpioPath), DateTime.UtcNow);
+                break;
             }
         }
 
-        public void Write(GpioPinValues pinValue)
+        public void Write(GpioValues pinValue)
         {
             File.WriteAllText(Path.Combine(GpioPath, "value"), ((int)pinValue).ToString());
             Directory.SetLastWriteTime(Path.Combine(GpioPath), DateTime.UtcNow);
         }
 
-        public GpioPinValues Read()
+        public GpioValues Read()
         {
             if (File.Exists(Path.Combine(GpioPath, "value")))
             {
                 var pinValue = File.ReadAllText(Path.Combine(GpioPath, "value"));
-                return (GpioPinValues)Enum.Parse(typeof(GpioPinValues), pinValue);
+                return (GpioValues)Enum.Parse(typeof(GpioValues), pinValue);
             }
             else
             {
-                return GpioPinValues.Low;
+                return GpioValues.Low;
             }
-        }
-
-        #endregion
-
-        #region IDisposable
-
-        public void Dispose()
-        {
-            _owner.ClosePin(PinNumber);
         }
 
         #endregion

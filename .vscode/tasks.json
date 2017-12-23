@@ -7,7 +7,7 @@
         {
             "taskName": "build",
             "args": [
-                "${workspaceRoot}/Garage/Garage.csproj"
+                "${workspaceRoot}/RaspberryPi.IoT/RaspberryPi.IoT.csproj"
             ],
             "isBuildCommand": true,
             "problemMatcher": "$msCompile"
