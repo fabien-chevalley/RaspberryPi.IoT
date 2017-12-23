@@ -1,4 +1,4 @@
-# jorat26
+# Jorat26
 A personal implementation of a RESTful API to drive my IoT devices.
 
 ## Language
