@@ -10,7 +10,7 @@
             "request": "launch",
             "program": "RaspberryPi.IoT",
             "args": [],
-            "cwd": "~/jorat26/garage",
+            "cwd": "/home/pi/jorat26",
             "stopAtEntry": false,
             "console": "internalConsole",
             "pipeTransport": {
@@ -19,9 +19,9 @@
                 "pipeArgs": [
                     "-pw",
                     "raspberry",
-                    "pi@192.168.1.66"
+                    "root@192.168.1.66"
                 ],
-                "debuggerPath": "~/vsdbg/vsdbg"
+                "debuggerPath": "/home/pi/vsdbg/vsdbg"
             }
         },
         {
@@ -35,9 +35,9 @@
                 "pipeArgs": [
                     "-pw",
                     "raspberry",
-                    "pi@192.168.1.66"
+                    "root@192.168.1.66"
                 ],
-                "debuggerPath": "~/vsdbg/vsdbg"
+                "debuggerPath": "/home/pi/vsdbg/vsdbg"
             }
         }
     ]
