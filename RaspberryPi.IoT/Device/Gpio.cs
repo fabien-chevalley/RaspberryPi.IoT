@@ -82,6 +82,13 @@ namespace RaspberryPi.IoT
             return pin.Read();
         }
 
+        public void Pulse(int pinNumber, int milliseconds)
+        {
+            Write(pinNumber, GpioValues.High);
+            System.Threading.Thread.Sleep(milliseconds);
+            Write(pinNumber, GpioValues.Low);
+        }
+
         public void Dispose()
         {
             foreach(var pin in _openPins.ToArray())
