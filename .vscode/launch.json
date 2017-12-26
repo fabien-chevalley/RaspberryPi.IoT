@@ -10,7 +10,7 @@
             "request": "launch",
             "program": "RaspberryPi.IoT",
             "args": [],
-            "cwd": "/home/pi/jorat26",
+            "cwd": "/home/pi/dev",
             "stopAtEntry": false,
             "console": "internalConsole",
             "pipeTransport": {
