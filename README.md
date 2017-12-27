@@ -6,3 +6,6 @@ It's written in .net core targeting a raspberry pi3.
 
 ## Roadmap
 The first goal, being to steer a garage door from an Angular frontend.
+
+## Debug
+Targeting .netcore21 allow to remote debug the raspberry. For more informations : https://github.com/OmniSharp/omnisharp-vscode/wiki/Remote-Debugging-On-Linux-Arm
