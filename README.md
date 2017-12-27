@@ -1,4 +1,4 @@
-# Jorat26
+# RaspberryPi.IoT
 A personal implementation of a RESTful API to drive my IoT devices.
 
 ## Language
