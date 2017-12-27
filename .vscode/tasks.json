@@ -6,9 +6,7 @@
     "tasks": [
         {
             "taskName": "build",
-            "args": [
-                "${workspaceRoot}/RaspberryPi.IoT/RaspberryPi.IoT.csproj"
-            ],
+            "args": [ ],
             "isBuildCommand": true,
             "problemMatcher": "$msCompile"
         }
