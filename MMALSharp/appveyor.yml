@@ -1,0 +1,49 @@
+version: '0.3.0.{build}'
+
+#assembly_info:
+#  patch: true
+#  file: AssemblyInfo.*
+#  assembly_version: '0.3.0.{build}'
+#  assembly_file_version: '0.3.0.{build}'
+#  assembly_informational_version: '0.3.0.{build}'
+
+# prevent the double build when a branch has an active PR
+skip_branch_with_pr: true
+
+configuration: Release
+
+os: Visual Studio 2017
+
+before_build:
+  - dotnet --info
+  - dotnet restore src\MMALSharp\MMALSharp.csproj
+  - dotnet restore src\MMALSharp.Common\MMALSharp.Common.csproj
+  - dotnet restore src\MMALSharp.FFmpeg\MMALSharp.FFmpeg.csproj
+  - dotnet restore tests\MMALSharp.Tests\MMALSharp.Tests.csproj
+  - dotnet restore tests\MMALSharp.Tests.FFmpeg\MMALSharp.Tests.FFmpeg.csproj
+
+build:
+  parallel: true                  # enable MSBuild parallel builds
+  project: MMALSharp.sln    # path to Visual Studio solution or project
+
+
+after_build:
+  - dotnet pack .\src\MMALSharp\MMALSharp.csproj --configuration Release
+  - dotnet pack .\src\MMALSharp.Common\MMALSharp.Common.csproj --configuration Release
+  - dotnet pack .\src\MMALSharp.FFmpeg\MMALSharp.FFmpeg.csproj --configuration Release
+
+artifacts:
+- path: '**\MMALSharp*.nupkg'
+  
+deploy:
+    # MyGet Deployment for builds & releases
+ - provider: NuGet
+   server: https://www.myget.org/F/mmalsharp/api/v2/package
+   symbol_server: https://www.myget.org/F/mmalsharp/symbols/api/v2/package
+   api_key:
+     secure: xii3+2rue3Dhi6r46YYK4ZkMRBRgoWEkN14JuXY6Eb0VbC61P883hwTR2xZUYY06
+   artifact: /.*\.nupkg/
+   on:
+     branch: master
+     
+test: off

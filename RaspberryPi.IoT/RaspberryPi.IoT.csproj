@@ -14,10 +14,16 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="2.0.0" />
-    <PackageReference Include="Microsoft.Extensions.Logging" Version="2.0.0" />
-    <PackageReference Include="NLog.Extensions.Logging" Version="1.0.0-rtm-rc2" />
-    <PackageReference Include="NLog" Version="4.5.0-rc01" />
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="2.0.0" />   	
+    <PackageReference Include="NLog.Extensions.Logging" Version="1.0.0-rtm-rc5" />
+    <PackageReference Include="NLog" Version="4.5.0-rc03" />
     <PackageReference Include="Woopsa" Version="1.2.3-dev00001" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MMALSharp\src\MMALSharp.Common\MMALSharp.Common.csproj" />
+    <ProjectReference Include="..\MMALSharp\src\MMALSharp.FFmpeg\MMALSharp.FFmpeg.csproj" />
+    <ProjectReference Include="..\MMALSharp\src\MMALSharp\MMALSharp.csproj" />
   </ItemGroup>
 
   <ItemGroup>
