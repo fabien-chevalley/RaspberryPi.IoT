@@ -12,25 +12,36 @@ using Nito.AsyncEx;
 
 namespace RaspberryPi.IoT
 {
+    //TODO : create a library and a sample application
     public class RaspberryPi : IRaspberryPi, IDisposable
     {
         private readonly ILogger<RaspberryPi> _logger;
         private readonly WoopsaServer _woopsaServer;
-        private readonly Gpio _gpio;
-        private readonly Camera _camera;
+        private readonly IGpio _gpio;
+        private readonly ICamera _camera;
 
-        public RaspberryPi(ILogger<RaspberryPi> logger)
+        public RaspberryPi(ILogger<RaspberryPi> logger, IGpio gpio, ICamera camera)
         {
             _logger = logger;
             _woopsaServer = new WoopsaServer(this);
-            _gpio = new Gpio(logger);
-            _camera = new Camera(logger);
+            _woopsaServer.Authenticator = new SimpleAuthenticator("Raspberry", 
+                (sender, e) =>  e.IsAuthenticated = e.Username == "admin" && e.Password == "admin");
+
+            _gpio = gpio;
+            _camera = camera;
             _logger.LogDebug("Raspberry pi created");
+
+
+            //TODO : to that more dynamically
+            _woopsaServer.WebServer.Routes.Add("camera", HTTPMethod.GET, new RouteHandlerFileSystem(Camera.SharedFolder));
         }
 
         public IGpio Gpio => _gpio;  
         
-        public Camera Camera => _camera;     
+        public ICamera Camera => _camera;     
+
+        //TODO : Save on persistant
+        public string SharedFolder { get; set; }
 
         #region IDisposable
         
@@ -44,7 +55,6 @@ namespace RaspberryPi.IoT
             {
                 if (disposing)
                 {
-                    MMALCamera.Instance.Cleanup();
                     _gpio.Dispose();
                     _woopsaServer.Dispose();
                 }

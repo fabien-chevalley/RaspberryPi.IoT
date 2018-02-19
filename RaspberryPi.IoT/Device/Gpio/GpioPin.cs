@@ -89,12 +89,23 @@ namespace RaspberryPi.IoT
             }
         }
 
-        public void Pulse(int milliseconds)
+        public void Pulse(GpioValues value, int milliseconds)
         {
-            Write(GpioValues.High);
-            System.Threading.Thread.Sleep(milliseconds);
-            Write(GpioValues.Low);
+            switch(value)
+            {
+                case GpioValues.Low:
+                    Write(GpioValues.Low);
+                    System.Threading.Thread.Sleep(milliseconds);
+                    Write(GpioValues.High);
+                    break;
+                case GpioValues.High:
+                    Write(GpioValues.High);
+                    System.Threading.Thread.Sleep(milliseconds);
+                    Write(GpioValues.Low);
+                    break;
+            }
         }
+        
 
         #endregion
 

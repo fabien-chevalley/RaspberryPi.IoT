@@ -7,7 +7,7 @@ namespace RaspberryPi.IoT
         void SetMode(GpioModes mode);
         void Write(GpioValues value);
         GpioValues Read();
-        void Pulse(int milliseconds);
+        void Pulse(GpioValues value, int milliseconds);
         string Status { get; }
     }
 }

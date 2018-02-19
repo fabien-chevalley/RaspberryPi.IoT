@@ -7,7 +7,7 @@ using Woopsa;
 
 namespace RaspberryPi.IoT
 {
-    public class Gpio : IGpio, IDisposable
+    public class Gpio : IGpio
     {
         private const string DevicePath = @"/sys/class/gpio";
         private readonly ILogger<RaspberryPi> _logger;
@@ -77,8 +77,6 @@ namespace RaspberryPi.IoT
 
         public GpioPin P1Pin13 { get; private set; }
 
-        #endregion
-
         private void InitializePin()
         {
             _gpioPins.Add(P1Pin3 = new GpioPin(2)); 
@@ -106,6 +104,8 @@ namespace RaspberryPi.IoT
             _gpioPins.Add(P1Pin37 = new GpioPin(26)); 
             _gpioPins.Add(P1Pin13 = new GpioPin(27)); 
         }
+
+        #endregion
 
         #region IDisposable
         

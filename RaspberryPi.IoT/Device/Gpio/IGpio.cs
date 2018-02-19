@@ -4,7 +4,7 @@ using System.Text;
 
 namespace RaspberryPi.IoT
 {
-    public interface IGpio
+    public interface IGpio : IDisposable
     {
         IEnumerable<GpioPin> Pins { get; }
     }
